@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-model href="https://raw.githubusercontent.com/OSInside/kiwi/refs/tags/v10.2.33/kiwi/schema/kiwi.rng" type="application/xml"?>
+<image schemaversion="8.3" name="azurelinux-4">
+    <description type="system">
+        <author>Azure Linux</author>
+        <contact>azurelinux@microsoft.com</contact>
+        <specification>Azure Linux 4 image hierarchy</specification>
+    </description>
+    <include from="this://./profiles/profiles.xml"/>
+    <include from="this://./profiles/config.xml"/>
+    <include from="this://./profiles/packages.xml"/>
+</image>

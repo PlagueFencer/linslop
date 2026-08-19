@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<image>
+    <profiles>
+        <profile name="BootableCore" description="Packages shared by every bootable image" import="false" />
+        <profile name="CloudCore" description="Packages shared by Azure guest images" import="false">
+            <requires profile="BootableCore" />
+        </profile>
+        <profile name="RuntimeRepos" description="Canonical runtime repository configuration" import="false" />
+        <profile name="RuntimeReposDev" description="Development runtime repository configuration" import="false" />
+        <profile name="BootstrapRepos" description="Canonical bootstrap repository configuration" import="false" />
+        <profile name="BootstrapReposDev" description="Development bootstrap repository configuration" import="false" />
+        <profile name="Fips" description="FIPS boot support" import="false" />
+        <profile name="UefiBoot" description="Architecture-specific UEFI boot packages" import="false" />
+        <profile name="LegacyBoot" description="Legacy BIOS boot packages" import="false" />
+        <profile name="ContainerCore" description="Core container packages" import="false" />
+        <profile name="DistrolessCore" description="Minimal distroless container packages" import="false" />
+        <profile name="DistrolessBase" description="Base distroless runtime packages" import="false">
+            <requires profile="DistrolessCore" />
+        </profile>
+        <profile name="WslCore" description="WSL packages" import="false" />
+        <profile name="MinimalOsCore" description="Minimal OS packages" import="false">
+            <requires profile="BootableCore" />
+        </profile>
+        <profile name="InstallerCore" description="Installer ISO packages" import="false">
+            <requires profile="BootableCore" />
+        </profile>
+        <profile name="VmBaseCore" description="VM base packages" import="false">
+            <requires profile="CloudCore" />
+        </profile>
+        <profile name="OnePBase" description="First-party Azure VM packages" import="false">
+            <requires profile="CloudCore" />
+        </profile>
+        <profile name="MarketplaceBase" description="Marketplace VM packages" import="false">
+            <requires profile="CloudCore" />
+        </profile>
+        <profile name="core" description="Core Container" import="false">
+            <requires profile="RuntimeRepos" />
+            <requires profile="BootstrapRepos" />
+            <requires profile="ContainerCore" />
+        </profile>
+        <profile name="core-dev" description="Core Container (dev)" import="false">
+            <requires profile="RuntimeReposDev" />
+            <requires profile="BootstrapReposDev" />
+            <requires profile="ContainerCore" />
+        </profile>
+        <profile name="distroless-minimal" description="Distroless Minimal Container" import="false">
+            <requires profile="DistrolessCore" />
+        </profile>
+        <profile name="distroless-base" description="Distroless Base Container" import="false">
+            <requires profile="DistrolessBase" />
+        </profile>
+        <profile name="distroless-debug" description="Distroless Debug Container" import="false">
+            <requires profile="DistrolessBase" />
+        </profile>
+        <profile name="vm-base" description="Ships azurelinux-repos (runtime → PMC beta)" import="false">
+            <requires profile="RuntimeRepos" />
+            <requires profile="BootstrapRepos" />
+            <requires profile="VmBaseCore" />
+        </profile>
+        <profile name="vm-base-dev" description="Ships azurelinux-repos-dev (runtime → azl4-dev)" import="false">
+            <requires profile="RuntimeReposDev" />
+            <requires profile="BootstrapReposDev" />
+            <requires profile="VmBaseCore" />
+        </profile>
+        <profile name="vm-iso-installer" description="Ships azurelinux-repos (runtime → PMC beta)" import="false">
+            <requires profile="RuntimeRepos" />
+            <requires profile="BootstrapRepos" />
+            <requires profile="UefiBoot" />
+            <requires profile="InstallerCore" />
+        </profile>
+        <profile name="vm-iso-installer-dev" description="Ships azurelinux-repos-dev (runtime → azl4-dev)" import="false">
+            <requires profile="RuntimeReposDev" />
+            <requires profile="BootstrapReposDev" />
+            <requires profile="UefiBoot" />
+            <requires profile="InstallerCore" />
+        </profile>
+        <profile name="wsl" description="Ships azurelinux-repos (runtime → PMC beta)" import="false">
+            <requires profile="BootstrapRepos" />
+            <requires profile="WslCore" />
+        </profile>
+        <profile name="wsl-dev" description="Ships azurelinux-repos-dev (runtime → azl4-dev)" import="false">
+            <requires profile="BootstrapReposDev" />
+            <requires profile="WslCore" />
+        </profile>
+        <profile name="minimal-os" description="Ships azurelinux-repos (runtime → PMC beta)" import="false">
+            <requires profile="RuntimeRepos" />
+            <requires profile="BootstrapRepos" />
+            <requires profile="MinimalOsCore" />
+        </profile>
+        <profile name="minimal-os-dev" description="Ships azurelinux-repos-dev (runtime → azl4-dev)" import="false">
+            <requires profile="RuntimeReposDev" />
+            <requires profile="BootstrapReposDev" />
+            <requires profile="MinimalOsCore" />
+        </profile>
+        <profile name="1p-vm-base-gen1" description="1P VM Base Gen1 Image (BIOS)" import="false">
+            <requires profile="RuntimeRepos" />
+            <requires profile="LegacyBoot" />
+            <requires profile="OnePBase" />
+        </profile>
+        <profile name="1p-vm-base-gen1-fips" description="1P VM Base Gen1 FIPS Image (BIOS)" import="false">
+            <requires profile="RuntimeRepos" />
+            <requires profile="Fips" />
+            <requires profile="LegacyBoot" />
+            <requires profile="OnePBase" />
+        </profile>
+        <profile name="1p-vm-base-gen2-fips" description="1P VM Base Gen2 FIPS Image (UEFI)" import="false">
+            <requires profile="RuntimeRepos" />
+            <requires profile="Fips" />
+            <requires profile="UefiBoot" />
+            <requires profile="OnePBase" />
+        </profile>
+        <profile name="marketplace-gen2" description="Ships azurelinux-repos (runtime → PMC)" import="false">
+            <requires profile="RuntimeRepos" />
+            <requires profile="BootstrapRepos" />
+            <requires profile="UefiBoot" />
+            <requires profile="MarketplaceBase" />
+        </profile>
+        <profile name="marketplace-gen2-dev" description="Ships azurelinux-repos-dev (runtime → azl4-dev)" import="false">
+            <requires profile="RuntimeReposDev" />
+            <requires profile="BootstrapReposDev" />
+            <requires profile="UefiBoot" />
+            <requires profile="MarketplaceBase" />
+        </profile>
+        <profile name="marketplace-gen2-cvm" description="Ships azurelinux-repos (runtime → PMC)" import="false">
+            <requires profile="RuntimeRepos" />
+            <requires profile="BootstrapRepos" />
+            <requires profile="MarketplaceBase" />
+        </profile>
+        <profile name="marketplace-gen2-cvm-dev" description="Ships azurelinux-repos-dev (runtime → azl4-dev)" import="false">
+            <requires profile="RuntimeReposDev" />
+            <requires profile="BootstrapReposDev" />
+            <requires profile="MarketplaceBase" />
+        </profile>
+        <profile name="marketplace-gen2-fips" description="Ships azurelinux-repos (runtime → PMC)" import="false">
+            <requires profile="RuntimeRepos" />
+            <requires profile="BootstrapRepos" />
+            <requires profile="Fips" />
+            <requires profile="UefiBoot" />
+            <requires profile="MarketplaceBase" />
+        </profile>
+        <profile name="marketplace-gen2-fips-dev" description="Ships azurelinux-repos-dev (runtime → azl4-dev)" import="false">
+            <requires profile="RuntimeReposDev" />
+            <requires profile="BootstrapReposDev" />
+            <requires profile="Fips" />
+            <requires profile="UefiBoot" />
+            <requires profile="MarketplaceBase" />
+        </profile>
+    </profiles>
+</image>

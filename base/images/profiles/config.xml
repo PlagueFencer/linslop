@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<image>
+    <preferences profiles="core,core-dev,distroless-base,distroless-debug,distroless-minimal">
+        <version>0.1</version>
+        <packagemanager>dnf5</packagemanager>
+    </preferences>
+    <preferences profiles="core">
+        <type image="oci">
+            <containerconfig name="microsoft/azurelinux/base/core" tag="4.0" additionalnames=":latest" workingdir="/">
+                <subcommand execute="/bin/bash" />
+            </containerconfig>
+        </type>
+    </preferences>
+    <repository type="rpm-md" alias="azurelinux-base" profiles="core,core-dev,distroless-base,distroless-debug,distroless-minimal,minimal-os,minimal-os-dev,vm-base,vm-base-dev,vm-iso-installer,vm-iso-installer-dev,wsl,wsl-dev">
+        <source path="https://stcontroltowerdevjwisitg.blob.core.windows.net/azl4-dev/base/$basearch" />
+    </repository>
+    <preferences profiles="core-dev">
+        <type image="oci">
+            <containerconfig name="microsoft/azurelinux/base/core" tag="4.0-dev" workingdir="/">
+                <subcommand execute="/bin/bash" />
+            </containerconfig>
+        </type>
+    </preferences>
+    <preferences profiles="distroless-minimal">
+        <type image="oci">
+            <containerconfig name="microsoft/azurelinux/distroless/minimal" tag="4.0" additionalnames=":latest" workingdir="/">
+                <subcommand clear="true" />
+            </containerconfig>
+        </type>
+    </preferences>
+    <preferences profiles="distroless-base">
+        <type image="oci">
+            <containerconfig name="microsoft/azurelinux/distroless/base" tag="4.0" additionalnames=":latest" workingdir="/">
+                <subcommand clear="true" />
+            </containerconfig>
+        </type>
+    </preferences>
+    <preferences profiles="distroless-debug">
+        <type image="oci">
+            <containerconfig name="microsoft/azurelinux/distroless/debug" tag="4.0" additionalnames=":latest" workingdir="/">
+                <subcommand clear="true" />
+            </containerconfig>
+        </type>
+    </preferences>
+    <preferences arch="x86_64" profiles="marketplace-gen2,marketplace-gen2-cvm,marketplace-gen2-cvm-dev,marketplace-gen2-dev,vm-base,vm-base-dev">
+        <version>0.1</version>
+        <packagemanager>dnf5</packagemanager>
+        <locale>en_US</locale>
+        <keytable>us</keytable>
+        <timezone>UTC</timezone>
+        <release-version>4.0</release-version>
+        <type image="oem" format="vhd-fixed" formatoptions="force_size" initrd_system="dracut" filesystem="ext4" fscreateoptions="-m 1" kernelcmdline="console=ttyS0 earlyprintk=ttyS0 rd.shell=0" firmware="uefi" overlayroot="false" eficsm="false" bootpartition="false" efipartsize="200" rootfs_label="azurelinux">
+            <bootloader name="grub2" bls="true" console="serial" timeout="1" />
+            <size unit="G">5</size>
+            <oemconfig>
+                <oem-resize>false</oem-resize>
+            </oemconfig>
+        </type>
+    </preferences>
+    <preferences arch="aarch64" profiles="marketplace-gen2,marketplace-gen2-dev,vm-base,vm-base-dev">
+        <version>0.1</version>
+        <packagemanager>dnf5</packagemanager>
+        <locale>en_US</locale>
+        <keytable>us</keytable>
+        <timezone>UTC</timezone>
+        <release-version>4.0</release-version>
+        <type image="oem" format="vhd-fixed" formatoptions="force_size" initrd_system="dracut" filesystem="ext4" fscreateoptions="-m 1" kernelcmdline="console=ttyAMA0 earlyprintk=ttyAMA0 rd.shell=0" firmware="uefi" overlayroot="false" eficsm="false" bootpartition="false" efipartsize="200" rootfs_label="azurelinux">
+            <bootloader name="grub2" bls="true" console="serial" timeout="1" />
+            <size unit="G">5</size>
+            <oemconfig>
+                <oem-resize>false</oem-resize>
+            </oemconfig>
+        </type>
+    </preferences>
+    <preferences profiles="vm-iso-installer,vm-iso-installer-dev">
+        <version>0.1</version>
+        <packagemanager>dnf5</packagemanager>
+        <locale>en_US</locale>
+        <keytable>us</keytable>
+        <timezone>UTC</timezone>
+        <release-version>4.0</release-version>
+        <type image="iso" flags="dmsquash" filesystem="ext4" kernelcmdline="console=ttyS0,115200 console=tty0 enforcing=0 audit=0 inst.text inst.lang=en_US.UTF-8 inst.nokill" firmware="uefi" hybridpersistent="false" mediacheck="true">
+            <bootloader name="grub2" timeout="5" grub_template="grub_template.cfg" />
+        </type>
+    </preferences>
+    <preferences profiles="wsl,wsl-dev">
+        <version>0.1</version>
+        <packagemanager>dnf5</packagemanager>
+        <locale>en_US</locale>
+        <timezone>UTC</timezone>
+        <release-version>4.0</release-version>
+        <type image="wsl" />
+        <rpm-locale-filtering>false</rpm-locale-filtering>
+        <rpm-excludedocs>false</rpm-excludedocs>
+    </preferences>
+    <preferences profiles="minimal-os,minimal-os-dev">
+        <version>0.1</version>
+        <packagemanager>dnf5</packagemanager>
+        <locale>C</locale>
+        <keytable>us</keytable>
+        <timezone>UTC</timezone>
+        <release-version>4.0</release-version>
+        <type image="oem" format="vhdx" initrd_system="dracut" filesystem="ext4" fscreateoptions="-m 1" firmware="uefi" overlayroot="false" eficsm="false" bootpartition="false" efipartsize="32" rootfs_label="azurelinux">
+            <bootloader name="grub2" bls="true" />
+            <size unit="G">1</size>
+            <oemconfig>
+                <oem-resize>false</oem-resize>
+            </oemconfig>
+        </type>
+    </preferences>
+    <preferences arch="x86_64" profiles="1p-vm-base-gen1">
+        <version>0.1</version>
+        <packagemanager>dnf5</packagemanager>
+        <locale>en_US</locale>
+        <keytable>us</keytable>
+        <timezone>UTC</timezone>
+        <release-version>4.0</release-version>
+        <type image="oem" format="vhd-fixed" formatoptions="force_size" initrd_system="dracut" filesystem="ext4" fscreateoptions="-m 1" kernelcmdline="console=ttyS0 rd.shell=0" firmware="bios" overlayroot="false" eficsm="false" bootpartition="false" rootfs_label="azurelinux">
+            <bootloader name="grub2" bls="true" console="serial" timeout="1" />
+            <size unit="G">5</size>
+            <oemconfig>
+                <oem-resize>false</oem-resize>
+            </oemconfig>
+        </type>
+    </preferences>
+    <repository type="rpm-md" alias="azurelinux-base" profiles="1p-vm-base-gen1,1p-vm-base-gen1-fips,1p-vm-base-gen2-fips,marketplace-gen2,marketplace-gen2-cvm,marketplace-gen2-cvm-dev,marketplace-gen2-dev,marketplace-gen2-fips,marketplace-gen2-fips-dev">
+        <source path="https://packages.microsoft.com/azurelinux/4.0/beta/base/$basearch" />
+    </repository>
+    <preferences arch="x86_64" profiles="1p-vm-base-gen1-fips">
+        <version>0.1</version>
+        <packagemanager>dnf5</packagemanager>
+        <locale>en_US</locale>
+        <keytable>us</keytable>
+        <timezone>UTC</timezone>
+        <release-version>4.0</release-version>
+        <type image="oem" format="vhd-fixed" formatoptions="force_size" initrd_system="dracut" filesystem="ext4" fscreateoptions="-m 1" kernelcmdline="console=ttyS0 fips=1 rd.shell=0" firmware="bios" overlayroot="false" eficsm="false" bootpartition="false" rootfs_label="azurelinux">
+            <bootloader name="grub2" bls="true" console="serial" timeout="1" />
+            <size unit="G">5</size>
+            <oemconfig>
+                <oem-resize>false</oem-resize>
+            </oemconfig>
+        </type>
+    </preferences>
+    <preferences arch="x86_64" profiles="1p-vm-base-gen2-fips,marketplace-gen2-fips,marketplace-gen2-fips-dev">
+        <version>0.1</version>
+        <packagemanager>dnf5</packagemanager>
+        <locale>en_US</locale>
+        <keytable>us</keytable>
+        <timezone>UTC</timezone>
+        <release-version>4.0</release-version>
+        <type image="oem" format="vhd-fixed" formatoptions="force_size" initrd_system="dracut" filesystem="ext4" fscreateoptions="-m 1" kernelcmdline="console=ttyS0 fips=1 rd.shell=0" firmware="uefi" overlayroot="false" eficsm="false" bootpartition="false" efipartsize="200" rootfs_label="azurelinux">
+            <bootloader name="grub2" bls="true" console="serial" timeout="1" />
+            <size unit="G">5</size>
+            <oemconfig>
+                <oem-resize>false</oem-resize>
+            </oemconfig>
+        </type>
+    </preferences>
+    <preferences arch="aarch64" profiles="1p-vm-base-gen2-fips,marketplace-gen2-fips,marketplace-gen2-fips-dev">
+        <version>0.1</version>
+        <packagemanager>dnf5</packagemanager>
+        <locale>en_US</locale>
+        <keytable>us</keytable>
+        <timezone>UTC</timezone>
+        <release-version>4.0</release-version>
+        <type image="oem" format="vhd-fixed" formatoptions="force_size" initrd_system="dracut" filesystem="ext4" fscreateoptions="-m 1" kernelcmdline="console=ttyAMA0 fips=1 rd.shell=0" firmware="uefi" overlayroot="false" eficsm="false" bootpartition="false" efipartsize="200" rootfs_label="azurelinux">
+            <bootloader name="grub2" bls="true" console="serial" timeout="1" />
+            <size unit="G">5</size>
+            <oemconfig>
+                <oem-resize>false</oem-resize>
+            </oemconfig>
+        </type>
+    </preferences>
+</image>

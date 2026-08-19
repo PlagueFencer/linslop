@@ -1,0 +1,403 @@
+<?xml version="1.0" encoding="utf-8"?>
+<image>
+    <packages type="bootstrap" profiles="BootableCore">
+        <package name="filesystem" />
+    </packages>
+    <packages type="image" profiles="BootableCore">
+        <package name="bash" />
+        <package name="ca-certificates" />
+        <package name="dnf5" />
+        <package name="grub2" />
+        <package name="iproute" />
+        <package name="kernel" />
+        <package name="shadow-utils" />
+        <package name="systemd" />
+        <package name="systemd-networkd" />
+        <package name="systemd-resolved" />
+        <package name="util-linux" />
+    </packages>
+    <packages type="image" profiles="CloudCore">
+        <package name="WALinuxAgent" />
+        <package name="azurelinux-release-cloud" />
+        <package name="bzip2" />
+        <package name="chrony" />
+        <package name="cloud-init" />
+        <package name="cloud-utils-growpart" />
+        <package name="cracklib-dicts" />
+        <package name="cryptsetup" />
+        <package name="file" />
+        <package name="glibc" />
+        <package name="glibc-langpack-en" />
+        <package name="grubby" />
+        <package name="gzip" />
+        <package name="hyperv-daemons" />
+        <package name="iputils" />
+        <package name="irqbalance" />
+        <package name="kernel-modules" />
+        <package name="lvm2" />
+        <package name="lz4" />
+        <package name="net-tools" />
+        <package name="nftables" />
+        <package name="openssh-clients" />
+        <package name="openssh-server" />
+        <package name="selinux-policy-targeted" />
+        <package name="setup" />
+        <package name="sudo" />
+        <package name="tar" />
+        <package name="wget" />
+        <package name="which" />
+        <package name="zlib" />
+    </packages>
+    <packages type="image" profiles="RuntimeRepos">
+        <package name="azurelinux-repos" />
+    </packages>
+    <packages type="image" profiles="RuntimeReposDev">
+        <package name="azurelinux-repos-dev" />
+    </packages>
+    <packages type="bootstrap" profiles="BootstrapRepos">
+        <package name="azurelinux-repos" />
+    </packages>
+    <packages type="bootstrap" profiles="BootstrapReposDev">
+        <package name="azurelinux-repos-dev" />
+    </packages>
+    <packages type="image" profiles="Fips">
+        <package name="dracut-fips" />
+    </packages>
+    <packages type="bootstrap" profiles="UefiBoot">
+        <package name="grub2-efi-aa64" arch="aarch64" />
+        <package name="grub2-efi-aa64-modules" arch="aarch64" />
+        <package name="grub2-efi-x64" arch="x86_64" />
+        <package name="grub2-efi-x64-modules" arch="x86_64" />
+        <package name="shim" arch="aarch64" />
+        <package name="shim" arch="x86_64" />
+    </packages>
+    <packages type="image" profiles="UefiBoot">
+        <package name="grub2-efi-aa64" arch="aarch64" />
+        <package name="grub2-efi-aa64-modules" arch="aarch64" />
+        <package name="grub2-efi-x64" arch="x86_64" />
+        <package name="grub2-efi-x64-modules" arch="x86_64" />
+        <package name="shim" arch="aarch64" />
+        <package name="shim" arch="x86_64" />
+    </packages>
+    <packages type="bootstrap" profiles="LegacyBoot">
+        <package name="grub2-pc" />
+    </packages>
+    <packages type="image" profiles="LegacyBoot">
+        <package name="grub2-pc" />
+        <package name="grub2-pc-modules" />
+    </packages>
+    <packages type="bootstrap" profiles="ContainerCore">
+        <package name="azurelinux-release-container" />
+        <package name="filesystem" />
+    </packages>
+    <packages type="image" profiles="ContainerCore">
+        <package name="azurelinux-release-container" />
+        <package name="bash" />
+        <package name="filesystem" />
+    </packages>
+    <packages type="bootstrap" profiles="DistrolessCore">
+        <package name="azurelinux-release-container" />
+        <package name="busybox" />
+        <package name="filesystem" />
+    </packages>
+    <packages type="image" profiles="DistrolessCore">
+        <package name="azurelinux-release-container" />
+        <package name="filesystem" />
+        <package name="tzdata" />
+    </packages>
+    <packages type="image" profiles="DistrolessBase">
+        <package name="glibc" />
+        <package name="libgcc" />
+        <package name="openssl-libs" />
+        <package name="setup" />
+    </packages>
+    <packages patternType="plusRecommended" type="image" profiles="WslCore">
+        <package name="acl" />
+        <package name="attr" />
+        <package name="bash-color-prompt" />
+        <package name="bash-completion" />
+        <package name="bind-utils" />
+        <package name="bzip2" />
+        <package name="curl" />
+        <package name="dbus" />
+        <package name="default-editor" />
+        <package name="file" />
+        <package name="glibc-langpack-en" />
+        <package name="gnupg2" />
+        <package name="iproute" />
+        <package name="iputils" />
+        <package name="less" />
+        <package name="lsof" />
+        <package name="man-db" />
+        <package name="man-pages" />
+        <package name="nmap-ncat" />
+        <package name="openssh-clients" />
+        <package name="passwd" />
+        <package name="pciutils" />
+        <package name="procps-ng" />
+        <package name="rsync" />
+        <package name="shadow-utils" />
+        <package name="sudo" />
+        <package name="symlinks" />
+        <package name="systemd-networkd" />
+        <package name="systemd-resolved" />
+        <package name="systemd-udev" />
+        <package name="tar" />
+        <package name="tcpdump" />
+        <package name="time" />
+        <package name="traceroute" />
+        <package name="tree" />
+        <package name="unzip" />
+        <package name="usbutils" />
+        <package name="util-linux" />
+        <package name="vim-minimal" />
+        <package name="wget" />
+        <package name="which" />
+        <package name="whois" />
+        <package name="wsl-setup" />
+        <package name="zip" />
+        <package name="zram-generator-defaults" />
+    </packages>
+    <packages type="bootstrap" profiles="WslCore">
+        <package name="azurelinux-release-wsl" />
+        <package name="bash" />
+        <package name="coreutils" />
+        <package name="dnf5" />
+        <package name="dnf5-plugins" />
+        <package name="rpm" />
+    </packages>
+    <packages type="bootstrap" profiles="MinimalOsCore">
+        <package name="azurelinux-release" />
+        <package name="grub2-efi-aa64" arch="aarch64" />
+        <package name="grub2-efi-aa64-modules" arch="aarch64" />
+        <package name="grub2-efi-x64" arch="x86_64" />
+        <package name="grub2-efi-x64-modules" arch="x86_64" />
+        <package name="shim" arch="aarch64" />
+        <package name="shim" arch="x86_64" />
+    </packages>
+    <packages type="image" profiles="MinimalOsCore">
+        <package name="azurelinux-release" />
+        <package name="dbus" />
+        <package name="e2fsprogs" />
+        <package name="glibc-minimal-langpack" />
+        <package name="iputils" />
+        <package name="irqbalance" />
+        <package name="ncurses-libs" />
+        <package name="openssl" />
+        <package name="rpm" />
+        <package name="sudo" />
+        <package name="systemd-udev" />
+        <package name="zlib" />
+    </packages>
+    <packages type="bootstrap" profiles="InstallerCore">
+        <package name="dracut-network" />
+    </packages>
+    <packages type="image" profiles="InstallerCore">
+        <package name="anaconda-core" />
+        <package name="anaconda-install-env-deps" />
+        <package name="anaconda-tui" />
+        <package name="azurelinux-release" />
+        <package name="azurelinux-rpm-config" />
+        <package name="coreutils" />
+        <package name="cracklib-dicts" />
+        <package name="createrepo_c" />
+        <package name="dracut-live" />
+        <package name="efibootmgr" />
+        <package name="glibc" />
+        <package name="glibc-langpack-en" />
+        <package name="hostname" />
+        <package name="hyperv-daemons" />
+        <package name="kernel-modules" />
+        <package name="selinux-policy-targeted" />
+        <package name="setup" />
+        <package name="tar" />
+        <package name="vim-minimal" />
+    </packages>
+    <packages type="bootstrap" profiles="VmBaseCore">
+        <package name="azurelinux-release-cloud" />
+        <package name="grub2-efi-aa64" arch="aarch64" />
+        <package name="grub2-efi-aa64-modules" arch="aarch64" />
+        <package name="grub2-efi-x64" arch="x86_64" />
+        <package name="grub2-efi-x64-modules" arch="x86_64" />
+        <package name="shim" arch="aarch64" />
+        <package name="shim" arch="x86_64" />
+    </packages>
+    <packages type="image" profiles="VmBaseCore">
+        <package name="acl" />
+        <package name="attr" />
+        <package name="audit" />
+        <package name="azure-vm-utils" />
+        <package name="bash-completion" />
+        <package name="bind-utils" />
+        <package name="brotli" />
+        <package name="chkconfig" />
+        <package name="coreutils" />
+        <package name="cronie" />
+        <package name="cyrus-sasl" />
+        <package name="device-mapper-event" />
+        <package name="dnf5-plugins" />
+        <package name="efibootmgr" />
+        <package name="firewalld" />
+        <package name="hostname" />
+        <package name="man-db" />
+        <package name="nano" />
+        <package name="ncurses" />
+        <package name="ncurses-term" />
+        <package name="nvme-cli" />
+        <package name="rootfiles" />
+        <package name="rsync" />
+        <package name="tpm2-tss" />
+        <package name="unzip" />
+        <package name="vim-minimal" />
+        <package name="zchunk" />
+    </packages>
+    <packages type="bootstrap" profiles="OnePBase">
+        <package name="azurelinux-release-identity-cloud" />
+    </packages>
+    <packages type="image" profiles="OnePBase">
+        <package name="SymCrypt" />
+        <package name="SymCrypt-OpenSSL" />
+        <package name="azurelinux-rpm-config" />
+        <package name="bc" />
+        <package name="cpio" />
+        <package name="cronie-anacron" />
+        <package name="curl" />
+        <package name="dbus" />
+        <package name="dhcpcd" />
+        <package name="dracut" />
+        <package name="e2fsprogs" />
+        <package name="elfutils-libelf" />
+        <package name="expat" />
+        <package name="filesystem" />
+        <package name="findutils" />
+        <package name="gdbm" />
+        <package name="grep" />
+        <package name="libtool" />
+        <package name="logrotate" />
+        <package name="ncurses-libs" />
+        <package name="openssl" />
+        <package name="pkg-config" />
+        <package name="procps-ng" />
+        <package name="python3" />
+        <package name="readline" />
+        <package name="rpm" />
+        <package name="rpm-libs" />
+        <package name="rsyslog" />
+        <package name="sed" />
+        <package name="sqlite-libs" />
+        <package name="systemd-udev" />
+        <package name="tdnf" />
+        <package name="tzdata" />
+        <package name="wireless-regdb" />
+        <package name="xz" />
+    </packages>
+    <packages type="bootstrap" profiles="MarketplaceBase">
+        <package name="azurelinux-release-identity-cloud" />
+    </packages>
+    <packages type="image" profiles="MarketplaceBase">
+        <package name="SymCrypt" />
+        <package name="SymCrypt-OpenSSL" />
+        <package name="acl" />
+        <package name="at" />
+        <package name="atop" />
+        <package name="attr" />
+        <package name="audit" />
+        <package name="azure-vm-utils" />
+        <package name="azurelinux-rpm-config" />
+        <package name="bash-completion" />
+        <package name="bc" />
+        <package name="bind-utils" />
+        <package name="cpio" />
+        <package name="cronie-anacron" />
+        <package name="curl" />
+        <package name="dbus" />
+        <package name="debootstrap" />
+        <package name="dhcpcd" />
+        <package name="dnf-plugins-core" />
+        <package name="dracut" />
+        <package name="e2fsprogs" />
+        <package name="efibootmgr" />
+        <package name="elfutils-libelf" />
+        <package name="expat" />
+        <package name="filesystem" />
+        <package name="findutils" />
+        <package name="gdbm" />
+        <package name="grep" />
+        <package name="hostname" />
+        <package name="iptables" />
+        <package name="jemalloc" />
+        <package name="keyutils" />
+        <package name="libdnf" />
+        <package name="libtool" />
+        <package name="libuser" />
+        <package name="logrotate" />
+        <package name="lsof" />
+        <package name="man-db" />
+        <package name="nano" />
+        <package name="ncurses" />
+        <package name="ncurses-libs" />
+        <package name="ncurses-term" />
+        <package name="newt" />
+        <package name="nss" />
+        <package name="nvme-cli" />
+        <package name="openssl" />
+        <package name="pciutils" />
+        <package name="pkg-config" />
+        <package name="procps-ng" />
+        <package name="python3" />
+        <package name="readline" />
+        <package name="rng-tools" />
+        <package name="rootfiles" />
+        <package name="rpm" />
+        <package name="rpm-libs" />
+        <package name="rsync" />
+        <package name="rsyslog" />
+        <package name="sed" />
+        <package name="sqlite-libs" />
+        <package name="strace" />
+        <package name="sysstat" />
+        <package name="systemd-udev" />
+        <package name="tcpdump" />
+        <package name="time" />
+        <package name="tmux" />
+        <package name="tpm2-tss" />
+        <package name="traceroute" />
+        <package name="tzdata" />
+        <package name="unzip" />
+        <package name="vim-minimal" />
+        <package name="wireless-regdb" />
+        <package name="xz" />
+        <package name="zchunk" />
+    </packages>
+    <packages type="image" profiles="distroless-debug">
+        <package name="busybox" />
+    </packages>
+    <packages type="image" profiles="1p-vm-base-gen2-fips">
+        <package name="efibootmgr" />
+    </packages>
+    <packages type="bootstrap" profiles="marketplace-gen2-cvm">
+        <package name="grub2-efi-x64" />
+        <package name="grub2-efi-x64-modules" />
+        <package name="shim" />
+    </packages>
+    <packages type="image" profiles="marketplace-gen2-cvm">
+        <package name="grub2-efi-x64" />
+        <package name="grub2-efi-x64-modules" />
+        <package name="shim" />
+        <package name="tpm2-tools" />
+    </packages>
+    <packages type="bootstrap" profiles="marketplace-gen2-cvm-dev">
+        <package name="grub2-efi-x64" />
+        <package name="grub2-efi-x64-modules" />
+        <package name="shim" />
+    </packages>
+    <packages type="image" profiles="marketplace-gen2-cvm-dev">
+        <package name="grub2-efi-x64" />
+        <package name="grub2-efi-x64-modules" />
+        <package name="shim" />
+        <package name="tpm2-tools" />
+    </packages>
+    <users profiles="vm-iso-installer,vm-iso-installer-dev">
+        <user name="root" password="" groups="root" />
+    </users>
+</image>

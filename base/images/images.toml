@@ -31,7 +31,7 @@
 
 [images.vm-base]
 description = "VM Base Image"
-definition = { type = "kiwi", path = "vm-base/vm-base.kiwi", profile = "vm-base" }
+definition = { type = "kiwi", path = "AzureLinux.kiwi", profile = "vm-base" }
 tests.test-suites = [
   { name = "static-image-checks" },
   { name = "lisa-main" },
@@ -49,7 +49,7 @@ runtime-package-management = true
 
 [images.vm-base-dev]
 description = "VM Base Image (dev)"
-definition = { type = "kiwi", path = "vm-base/vm-base.kiwi", profile = "vm-base-dev" }
+definition = { type = "kiwi", path = "AzureLinux.kiwi", profile = "vm-base-dev" }
 tests.test-suites = [
   { name = "static-image-checks" },
   { name = "lisa-main" },
@@ -68,7 +68,7 @@ runtime-package-management = true
 # ---- container-base (core profile) -------------------------------------
 [images.container-base]
 description = "Container Base Image"
-definition = { type = "kiwi", path = "container-base/container-base.kiwi", profile = "core" }
+definition = { type = "kiwi", path = "AzureLinux.kiwi", profile = "core" }
 tests.test-suites = [
     { name = "static-image-checks" },
     { name = "runtime-container-tests" },
@@ -82,7 +82,7 @@ runtime-package-management = true
 
 [images.container-base-dev]
 description = "Container Base Image (dev)"
-definition = { type = "kiwi", path = "container-base/container-base.kiwi", profile = "core-dev" }
+definition = { type = "kiwi", path = "AzureLinux.kiwi", profile = "core-dev" }
 tests.test-suites = [
     { name = "static-image-checks" },
     { name = "runtime-container-tests" },
@@ -100,7 +100,7 @@ runtime-package-management = true
 
 [images.container-distroless-minimal]
 description = "Container Distroless Minimal Image"
-definition = { type = "kiwi", path = "container-base/container-base.kiwi", profile = "distroless-minimal" }
+definition = { type = "kiwi", path = "AzureLinux.kiwi", profile = "distroless-minimal" }
 tests.test-suites = [{ name = "static-image-checks" }]
 
 [images.container-distroless-minimal.capabilities]
@@ -111,7 +111,7 @@ runtime-package-management = false
 
 [images.container-distroless-base]
 description = "Container Distroless Base Image"
-definition = { type = "kiwi", path = "container-base/container-base.kiwi", profile = "distroless-base" }
+definition = { type = "kiwi", path = "AzureLinux.kiwi", profile = "distroless-base" }
 tests.test-suites = [{ name = "static-image-checks" }]
 
 [images.container-distroless-base.capabilities]
@@ -122,7 +122,7 @@ runtime-package-management = false
 
 [images.container-distroless-debug]
 description = "Container Distroless Debug Image"
-definition = { type = "kiwi", path = "container-base/container-base.kiwi", profile = "distroless-debug" }
+definition = { type = "kiwi", path = "AzureLinux.kiwi", profile = "distroless-debug" }
 tests.test-suites = [{ name = "static-image-checks" }]
 
 [images.container-distroless-debug.capabilities]
@@ -135,21 +135,213 @@ runtime-package-management = false
 
 [images.wsl]
 description = "WSL Image"
-definition = { type = "kiwi", path = "wsl/wsl.kiwi", profile = "wsl" }
+definition = { type = "kiwi", path = "AzureLinux.kiwi", profile = "wsl" }
 
 [images.wsl-dev]
 description = "WSL Image (dev)"
-definition = { type = "kiwi", path = "wsl/wsl.kiwi", profile = "wsl-dev" }
+definition = { type = "kiwi", path = "AzureLinux.kiwi", profile = "wsl-dev" }
 
 # ---- vm-iso-installer --------------------------------------------------
 
 [images.vm-iso-installer]
 description = "VM ISO Installer"
-definition = { type = "kiwi", path = "vm-iso-installer/vm-iso-installer.kiwi", profile = "vm-iso-installer" }
+definition = { type = "kiwi", path = "AzureLinux.kiwi", profile = "vm-iso-installer" }
 
 [images.vm-iso-installer-dev]
 description = "VM ISO Installer (dev)"
-definition = { type = "kiwi", path = "vm-iso-installer/vm-iso-installer.kiwi", profile = "vm-iso-installer-dev" }
+definition = { type = "kiwi", path = "AzureLinux.kiwi", profile = "vm-iso-installer-dev" }
+
+# ---- additional VM profiles --------------------------------------------
+
+[images.minimal-os]
+description = "Minimal OS Image"
+definition = { type = "kiwi", path = "AzureLinux.kiwi", profile = "minimal-os" }
+tests.test-suites = [{ name = "static-image-checks" }]
+
+[images.minimal-os.capabilities]
+machine-bootable = true
+container = false
+systemd = true
+runtime-package-management = true
+
+[images.minimal-os-dev]
+description = "Minimal OS Image (dev)"
+definition = { type = "kiwi", path = "AzureLinux.kiwi", profile = "minimal-os-dev" }
+tests.test-suites = [{ name = "static-image-checks" }]
+
+[images.minimal-os-dev.capabilities]
+machine-bootable = true
+container = false
+systemd = true
+runtime-package-management = true
+
+[images.1p-vm-base-gen1]
+description = "1P VM Base Gen1 Image (BIOS)"
+definition = { type = "kiwi", path = "AzureLinux.kiwi", profile = "1p-vm-base-gen1" }
+tests.test-suites = [
+  { name = "static-image-checks" },
+  { name = "lisa-main" },
+  { name = "lisa-xfs" },
+  { name = "lisa-perf" },
+  { name = "lisa-smoke" },
+  { name = "lisa-kernel-ltp" },
+]
+
+[images.1p-vm-base-gen1.capabilities]
+machine-bootable = true
+container = false
+systemd = true
+runtime-package-management = true
+
+[images.1p-vm-base-gen1-fips]
+description = "1P VM Base Gen1 FIPS Image (BIOS)"
+definition = { type = "kiwi", path = "AzureLinux.kiwi", profile = "1p-vm-base-gen1-fips" }
+tests.test-suites = [
+  { name = "static-image-checks" },
+  { name = "lisa-main" },
+  { name = "lisa-xfs" },
+  { name = "lisa-perf" },
+  { name = "lisa-smoke" },
+  { name = "lisa-kernel-ltp" },
+  { name = "lisa-fips" },
+]
+
+[images.1p-vm-base-gen1-fips.capabilities]
+machine-bootable = true
+container = false
+systemd = true
+runtime-package-management = true
+
+[images.1p-vm-base-gen2-fips]
+description = "1P VM Base Gen2 FIPS Image (UEFI)"
+definition = { type = "kiwi", path = "AzureLinux.kiwi", profile = "1p-vm-base-gen2-fips" }
+tests.test-suites = [
+  { name = "static-image-checks" },
+  { name = "lisa-main" },
+  { name = "lisa-xfs" },
+  { name = "lisa-perf" },
+  { name = "lisa-smoke" },
+  { name = "lisa-kernel-ltp" },
+  { name = "lisa-fips" },
+]
+
+[images.1p-vm-base-gen2-fips.capabilities]
+machine-bootable = true
+container = false
+systemd = true
+runtime-package-management = true
+
+[images.marketplace-gen2]
+description = "Marketplace Gen2 Image"
+definition = { type = "kiwi", path = "AzureLinux.kiwi", profile = "marketplace-gen2" }
+tests.test-suites = [
+  { name = "static-image-checks" },
+  { name = "lisa-main" },
+  { name = "lisa-xfs" },
+  { name = "lisa-perf" },
+  { name = "lisa-smoke" },
+  { name = "lisa-kernel-ltp" },
+]
+
+[images.marketplace-gen2.capabilities]
+machine-bootable = true
+container = false
+systemd = true
+runtime-package-management = true
+
+[images.marketplace-gen2-dev]
+description = "Marketplace Gen2 Image (dev)"
+definition = { type = "kiwi", path = "AzureLinux.kiwi", profile = "marketplace-gen2-dev" }
+tests.test-suites = [
+  { name = "static-image-checks" },
+  { name = "lisa-main" },
+  { name = "lisa-xfs" },
+  { name = "lisa-perf" },
+  { name = "lisa-smoke" },
+  { name = "lisa-kernel-ltp" },
+]
+
+[images.marketplace-gen2-dev.capabilities]
+machine-bootable = true
+container = false
+systemd = true
+runtime-package-management = true
+
+[images.marketplace-gen2-cvm]
+description = "Marketplace Gen2 Confidential VM Image"
+definition = { type = "kiwi", path = "AzureLinux.kiwi", profile = "marketplace-gen2-cvm" }
+tests.test-suites = [
+  { name = "static-image-checks" },
+  { name = "lisa-main" },
+  { name = "lisa-xfs" },
+  { name = "lisa-perf" },
+  { name = "lisa-smoke" },
+  { name = "lisa-cvm" },
+  { name = "lisa-kernel-ltp" },
+]
+
+[images.marketplace-gen2-cvm.capabilities]
+machine-bootable = true
+container = false
+systemd = true
+runtime-package-management = true
+
+[images.marketplace-gen2-cvm-dev]
+description = "Marketplace Gen2 Confidential VM Image (dev)"
+definition = { type = "kiwi", path = "AzureLinux.kiwi", profile = "marketplace-gen2-cvm-dev" }
+tests.test-suites = [
+  { name = "static-image-checks" },
+  { name = "lisa-main" },
+  { name = "lisa-xfs" },
+  { name = "lisa-perf" },
+  { name = "lisa-smoke" },
+  { name = "lisa-cvm" },
+  { name = "lisa-kernel-ltp" },
+]
+
+[images.marketplace-gen2-cvm-dev.capabilities]
+machine-bootable = true
+container = false
+systemd = true
+runtime-package-management = true
+
+[images.marketplace-gen2-fips]
+description = "Marketplace Gen2 FIPS Image"
+definition = { type = "kiwi", path = "AzureLinux.kiwi", profile = "marketplace-gen2-fips" }
+tests.test-suites = [
+  { name = "static-image-checks" },
+  { name = "lisa-main" },
+  { name = "lisa-xfs" },
+  { name = "lisa-perf" },
+  { name = "lisa-smoke" },
+  { name = "lisa-kernel-ltp" },
+  { name = "lisa-fips" },
+]
+
+[images.marketplace-gen2-fips.capabilities]
+machine-bootable = true
+container = false
+systemd = true
+runtime-package-management = true
+
+[images.marketplace-gen2-fips-dev]
+description = "Marketplace Gen2 FIPS Image (dev)"
+definition = { type = "kiwi", path = "AzureLinux.kiwi", profile = "marketplace-gen2-fips-dev" }
+tests.test-suites = [
+  { name = "static-image-checks" },
+  { name = "lisa-main" },
+  { name = "lisa-xfs" },
+  { name = "lisa-perf" },
+  { name = "lisa-smoke" },
+  { name = "lisa-kernel-ltp" },
+  { name = "lisa-fips" },
+]
+
+[images.marketplace-gen2-fips-dev.capabilities]
+machine-bootable = true
+container = false
+systemd = true
+runtime-package-management = true
 
 # ============================================================================
 # Test suites
@@ -178,6 +370,10 @@ description = "Lisa cvm tests"
 [test-suites.lisa-kernel-ltp]
 type = "lisa"
 description = "Lisa kernel LTP tests"
+
+[test-suites.lisa-fips]
+type = "lisa"
+description = "Lisa FIPS tests"
 
 # Single shared pytest suite for static (offline) image validation.
 [test-suites.static-image-checks]
