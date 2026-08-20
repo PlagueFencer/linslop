@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Azure Linux 4 KIWI Image Hierarchy</title>
+<style>
+:root {
+    color-scheme: light dark;
+    --background: #f5f7fa;
+    --surface: #ffffff;
+    --surface-alt: #f0f4f8;
+    --text: #17212b;
+    --muted: #596773;
+    --border: #c9d3dc;
+    --accent: #0078d4;
+    --accent-soft: #e6f2fb;
+    --selected: #dff6dd;
+    --shadow: 0 2px 12px rgba(20, 40, 60, 0.08);
+}
+@media (prefers-color-scheme: dark) {
+    :root {
+        --background: #111820;
+        --surface: #18222c;
+        --surface-alt: #202d39;
+        --text: #e8eef3;
+        --muted: #acbac5;
+        --border: #40515f;
+        --accent: #55aef0;
+        --accent-soft: #183c57;
+        --selected: #214c2a;
+        --shadow: none;
+    }
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+    margin: 0;
+    color: var(--text);
+    background: var(--background);
+    font: 15px/1.55 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+header {
+    padding: 2rem max(1.5rem, calc((100vw - 1500px) / 2));
+    color: white;
+    background: linear-gradient(120deg, #005a9e, #0078d4);
+}
+header h1 { margin: 0 0 0.4rem; font-size: clamp(1.7rem, 3vw, 2.6rem); }
+header p { margin: 0; opacity: 0.9; }
+nav {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    display: flex;
+    gap: 0.6rem;
+    padding: 0.7rem max(1.5rem, calc((100vw - 1500px) / 2));
+    overflow-x: auto;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+}
+nav a {
+    padding: 0.35rem 0.65rem;
+    color: var(--accent);
+    white-space: nowrap;
+    text-decoration: none;
+    border-radius: 0.35rem;
+}
+nav a:hover { background: var(--accent-soft); }
+main { max-width: 1500px; margin: auto; padding: 1.5rem; }
+article {
+    margin-bottom: 1.5rem;
+    padding: clamp(1rem, 3vw, 2rem);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 0.6rem;
+    box-shadow: var(--shadow);
+}
+.source {
+    float: right;
+    color: var(--muted);
+    font-size: 0.85rem;
+}
+h1, h2, h3 { line-height: 1.25; }
+article > h1:first-of-type { margin-top: 0; }
+h2 { margin-top: 2rem; padding-bottom: 0.25rem; border-bottom: 1px solid var(--border); }
+code {
+    padding: 0.1rem 0.3rem;
+    color: var(--text);
+    background: var(--surface-alt);
+    border-radius: 0.25rem;
+}
+pre {
+    padding: 1rem;
+    overflow: auto;
+    background: var(--surface-alt);
+    border: 1px solid var(--border);
+    border-radius: 0.4rem;
+}
+pre code { padding: 0; background: transparent; }
+.table-card {
+    margin: 1rem 0 1.75rem;
+    border: 1px solid var(--border);
+    border-radius: 0.45rem;
+    overflow: hidden;
+}
+.table-tools {
+    display: flex;
+    gap: 0.6rem;
+    align-items: center;
+    padding: 0.65rem;
+    background: var(--surface-alt);
+    border-bottom: 1px solid var(--border);
+}
+.table-tools input {
+    width: min(28rem, 100%);
+    padding: 0.45rem 0.65rem;
+    color: var(--text);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 0.35rem;
+}
+.table-count { margin-left: auto; color: var(--muted); white-space: nowrap; }
+.table-scroll { max-height: 70vh; overflow: auto; }
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    font-size: 0.88rem;
+}
+th, td {
+    min-width: 7rem;
+    padding: 0.45rem 0.6rem;
+    text-align: left;
+    vertical-align: top;
+    border-right: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+}
+th {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    background: var(--surface-alt);
+}
+th:first-child, td:first-child {
+    position: sticky;
+    left: 0;
+    z-index: 1;
+    background: var(--surface);
+}
+th:first-child { z-index: 3; background: var(--surface-alt); }
+td.selected { text-align: center; font-weight: 700; background: var(--selected); }
+tbody tr:hover td { outline: 1px solid var(--accent); outline-offset: -1px; }
+tr:last-child td { border-bottom: 0; }
+th:last-child, td:last-child { border-right: 0; }
+.empty { padding: 1rem; color: var(--muted); text-align: center; }
+@media print {
+    nav, .table-tools { display: none; }
+    body, article { background: white; color: black; }
+    article { border: 0; box-shadow: none; break-after: page; }
+    .table-scroll { max-height: none; overflow: visible; }
+    th { position: static; }
+}
+</style>
+</head>
+<body>
+<header>
+    <h1>Azure Linux 4 KIWI Image Hierarchy</h1>
+    <p>Hierarchy overview, image composition matrix, and package membership.</p>
+</header>
+<nav id="navigation" aria-label="Document sections"></nav>
+<main id="content"></main>
+<script id="document-data" type="application/json">{"documents": [{"label": "Hierarchy overview", "source": "README.md", "nodes": [{"type": "heading", "level": 1, "text": "Azure Linux 4 KIWI image hierarchy"}, {"type": "paragraph", "text": "`AzureLinux.kiwi` is the shared entry point for all Azure Linux 4 images. The image registry selects one leaf profile for each image."}, {"type": "paragraph", "text": "The entry point uses non-nested KIWI includes:"}, {"type": "list", "items": ["`profiles/profiles.xml` defines leaf profiles and their inheritance.", "`profiles/config.xml` contains profile-scoped preferences and repositories.", "`profiles/packages.xml` contains package groups and the installer user."]}, {"type": "heading", "level": 2, "text": "Package hierarchy"}, {"type": "paragraph", "text": "The package profiles are layered from broad to specific:"}, {"type": "code", "language": "text", "text": "BootableCore\n\u2514\u2500\u2500 CloudCore\n    \u251c\u2500\u2500 VmBaseCore\n    \u251c\u2500\u2500 OnePBase\n    \u2514\u2500\u2500 MarketplaceBase\n\nContainerCore\nDistrolessCore\n\u2514\u2500\u2500 DistrolessBase\n\nWslCore\nMinimalOsCore -> BootableCore\nInstallerCore -> BootableCore"}, {"type": "heading", "level": 3, "text": "Core and base naming"}, {"type": "paragraph", "text": "`Core` identifies a foundational package set shared across a broad image category. Core profiles contain the smallest common layer at that level of the hierarchy, such as `BootableCore`, `CloudCore`, or `DistrolessCore`."}, {"type": "paragraph", "text": "`Base` identifies the common baseline for a narrower family of sibling images. Base profiles build on an applicable core and contain packages shared by every variant in that family, such as `OnePBase`, `MarketplaceBase`, or `DistrolessBase`."}, {"type": "paragraph", "text": "These names are project conventions, not KIWI language features. KIWI treats core and base profiles as ordinary profiles. In `VmBaseCore`, `vm-base` is the image family name and `Core` still describes the profile's role."}, {"type": "heading", "level": 2, "text": "Image composition"}, {"type": "paragraph", "text": "The table lists each selected leaf profile and its full transitive profile composition:"}, {"type": "table", "headers": ["Image", "Profiles"], "rows": [["`vm-base`", "`RuntimeRepos`, `BootstrapRepos`, `BootableCore`, `CloudCore`, `VmBaseCore`, `vm-base`"], ["`vm-base-dev`", "`RuntimeReposDev`, `BootstrapReposDev`, `BootableCore`, `CloudCore`, `VmBaseCore`, `vm-base-dev`"], ["`container-base`", "`RuntimeRepos`, `BootstrapRepos`, `ContainerCore`, `core`"], ["`container-base-dev`", "`RuntimeReposDev`, `BootstrapReposDev`, `ContainerCore`, `core-dev`"], ["`container-distroless-minimal`", "`DistrolessCore`, `distroless-minimal`"], ["`container-distroless-base`", "`DistrolessCore`, `DistrolessBase`, `distroless-base`"], ["`container-distroless-debug`", "`DistrolessCore`, `DistrolessBase`, `distroless-debug`"], ["`wsl`", "`BootstrapRepos`, `WslCore`, `wsl`"], ["`wsl-dev`", "`BootstrapReposDev`, `WslCore`, `wsl-dev`"], ["`vm-iso-installer`", "`RuntimeRepos`, `BootstrapRepos`, `UefiBoot`, `BootableCore`, `InstallerCore`, `vm-iso-installer`"], ["`vm-iso-installer-dev`", "`RuntimeReposDev`, `BootstrapReposDev`, `UefiBoot`, `BootableCore`, `InstallerCore`, `vm-iso-installer-dev`"], ["`minimal-os`", "`RuntimeRepos`, `BootstrapRepos`, `BootableCore`, `MinimalOsCore`, `minimal-os`"], ["`minimal-os-dev`", "`RuntimeReposDev`, `BootstrapReposDev`, `BootableCore`, `MinimalOsCore`, `minimal-os-dev`"], ["`1p-vm-base-gen1`", "`RuntimeRepos`, `LegacyBoot`, `BootableCore`, `CloudCore`, `OnePBase`, `1p-vm-base-gen1`"], ["`1p-vm-base-gen1-fips`", "`RuntimeRepos`, `Fips`, `LegacyBoot`, `BootableCore`, `CloudCore`, `OnePBase`, `1p-vm-base-gen1-fips`"], ["`1p-vm-base-gen2-fips`", "`RuntimeRepos`, `Fips`, `UefiBoot`, `BootableCore`, `CloudCore`, `OnePBase`, `1p-vm-base-gen2-fips`"], ["`marketplace-gen2`", "`RuntimeRepos`, `BootstrapRepos`, `UefiBoot`, `BootableCore`, `CloudCore`, `MarketplaceBase`, `marketplace-gen2`"], ["`marketplace-gen2-dev`", "`RuntimeReposDev`, `BootstrapReposDev`, `UefiBoot`, `BootableCore`, `CloudCore`, `MarketplaceBase`, `marketplace-gen2-dev`"], ["`marketplace-gen2-cvm`", "`RuntimeRepos`, `BootstrapRepos`, `BootableCore`, `CloudCore`, `MarketplaceBase`, `marketplace-gen2-cvm`"], ["`marketplace-gen2-cvm-dev`", "`RuntimeReposDev`, `BootstrapReposDev`, `BootableCore`, `CloudCore`, `MarketplaceBase`, `marketplace-gen2-cvm-dev`"], ["`marketplace-gen2-fips`", "`RuntimeRepos`, `BootstrapRepos`, `Fips`, `UefiBoot`, `BootableCore`, `CloudCore`, `MarketplaceBase`, `marketplace-gen2-fips`"], ["`marketplace-gen2-fips-dev`", "`RuntimeReposDev`, `BootstrapReposDev`, `Fips`, `UefiBoot`, `BootableCore`, `CloudCore`, `MarketplaceBase`, `marketplace-gen2-fips-dev`"]]}, {"type": "paragraph", "text": "Orthogonal profiles add reusable traits:"}, {"type": "list", "items": ["`RuntimeRepos` / `RuntimeReposDev`", "`BootstrapRepos` / `BootstrapReposDev`", "`UefiBoot`", "`LegacyBoot`", "`Fips`"]}, {"type": "paragraph", "text": "Leaf profiles should contain only packages unique to that image. Most leaves currently contain no direct package declarations. The exceptions are the distroless debug utility, Gen2 `efibootmgr`, and the CVM-specific boot stack."}]}, {"label": "Image profile matrix", "source": "image-profile-matrix.md", "nodes": [{"type": "heading", "level": 1, "text": "Azure Linux 4 image profile matrix"}, {"type": "paragraph", "text": "Development images are omitted. An X indicates that the profile is selected directly or transitively by the image."}, {"type": "heading", "level": 2, "text": "VM images"}, {"type": "table", "headers": ["Profile", "vm-base", "vm-iso-installer", "minimal-os", "1p-vm-base-gen1", "1p-vm-base-gen1-fips", "1p-vm-base-gen2-fips", "marketplace-gen2", "marketplace-gen2-cvm", "marketplace-gen2-fips"], "rows": [["BootableCore", "X", "X", "X", "X", "X", "X", "X", "X", "X"], ["CloudCore", "X", "", "", "X", "X", "X", "X", "X", "X"], ["RuntimeRepos", "X", "X", "X", "X", "X", "X", "X", "X", "X"], ["BootstrapRepos", "X", "X", "X", "", "", "", "X", "X", "X"], ["Fips", "", "", "", "", "X", "X", "", "", "X"], ["UefiBoot", "", "X", "", "", "", "X", "X", "", "X"], ["LegacyBoot", "", "", "", "X", "X", "", "", "", ""], ["MinimalOsCore", "", "", "X", "", "", "", "", "", ""], ["InstallerCore", "", "X", "", "", "", "", "", "", ""], ["VmBaseCore", "X", "", "", "", "", "", "", "", ""], ["OnePBase", "", "", "", "X", "X", "X", "", "", ""], ["MarketplaceBase", "", "", "", "", "", "", "X", "X", "X"], ["vm-base", "X", "", "", "", "", "", "", "", ""], ["vm-iso-installer", "", "X", "", "", "", "", "", "", ""], ["minimal-os", "", "", "X", "", "", "", "", "", ""], ["1p-vm-base-gen1", "", "", "", "X", "", "", "", "", ""], ["1p-vm-base-gen1-fips", "", "", "", "", "X", "", "", "", ""], ["1p-vm-base-gen2-fips", "", "", "", "", "", "X", "", "", ""], ["marketplace-gen2", "", "", "", "", "", "", "X", "", ""], ["marketplace-gen2-cvm", "", "", "", "", "", "", "", "X", ""], ["marketplace-gen2-fips", "", "", "", "", "", "", "", "", "X"]]}, {"type": "heading", "level": 2, "text": "Container and WSL images"}, {"type": "table", "headers": ["Profile", "wsl", "container-base", "container-distroless-minimal", "container-distroless-base", "container-distroless-debug"], "rows": [["RuntimeRepos", "", "X", "", "", ""], ["BootstrapRepos", "X", "X", "", "", ""], ["ContainerCore", "", "X", "", "", ""], ["DistrolessCore", "", "", "X", "X", "X"], ["DistrolessBase", "", "", "", "X", "X"], ["WslCore", "X", "", "", "", ""], ["wsl", "X", "", "", "", ""], ["core", "", "X", "", "", ""], ["distroless-minimal", "", "", "X", "", ""], ["distroless-base", "", "", "", "X", ""], ["distroless-debug", "", "", "", "", "X"]]}]}, {"label": "Profile package tables", "source": "profile-package-tables.md", "nodes": [{"type": "heading", "level": 1, "text": "Azure Linux 4 profile package tables"}, {"type": "paragraph", "text": "Each column is a profile and each cell below it is a package declared by that profile. Package names are deduplicated across bootstrap and image package blocks. Architecture qualifiers and package phase are omitted."}, {"type": "heading", "level": 2, "text": "Core profiles"}, {"type": "heading", "level": 3, "text": "Foundational core profiles"}, {"type": "table", "headers": ["BootableCore", "CloudCore", "ContainerCore", "DistrolessCore"], "rows": [["bash", "WALinuxAgent", "azurelinux-release-container", "azurelinux-release-container"], ["ca-certificates", "azurelinux-release-cloud", "bash", "busybox"], ["dnf5", "bzip2", "filesystem", "filesystem"], ["filesystem", "chrony", "", "tzdata"], ["grub2", "cloud-init", "", ""], ["iproute", "cloud-utils-growpart", "", ""], ["kernel", "cracklib-dicts", "", ""], ["shadow-utils", "cryptsetup", "", ""], ["systemd", "file", "", ""], ["systemd-networkd", "glibc", "", ""], ["systemd-resolved", "glibc-langpack-en", "", ""], ["util-linux", "grubby", "", ""], ["", "gzip", "", ""], ["", "hyperv-daemons", "", ""], ["", "iputils", "", ""], ["", "irqbalance", "", ""], ["", "kernel-modules", "", ""], ["", "lvm2", "", ""], ["", "lz4", "", ""], ["", "net-tools", "", ""], ["", "nftables", "", ""], ["", "openssh-clients", "", ""], ["", "openssh-server", "", ""], ["", "selinux-policy-targeted", "", ""], ["", "setup", "", ""], ["", "sudo", "", ""], ["", "tar", "", ""], ["", "wget", "", ""], ["", "which", "", ""], ["", "zlib", "", ""]]}, {"type": "heading", "level": 3, "text": "Image-family core profiles"}, {"type": "table", "headers": ["WslCore", "MinimalOsCore", "InstallerCore", "VmBaseCore"], "rows": [["acl", "azurelinux-release", "anaconda-core", "acl"], ["attr", "dbus", "anaconda-install-env-deps", "attr"], ["azurelinux-release-wsl", "e2fsprogs", "anaconda-tui", "audit"], ["bash", "glibc-minimal-langpack", "azurelinux-release", "azure-vm-utils"], ["bash-color-prompt", "grub2-efi-aa64", "azurelinux-rpm-config", "azurelinux-release-cloud"], ["bash-completion", "grub2-efi-aa64-modules", "coreutils", "bash-completion"], ["bind-utils", "grub2-efi-x64", "cracklib-dicts", "bind-utils"], ["bzip2", "grub2-efi-x64-modules", "createrepo_c", "brotli"], ["coreutils", "iputils", "dracut-live", "chkconfig"], ["curl", "irqbalance", "dracut-network", "coreutils"], ["dbus", "ncurses-libs", "efibootmgr", "cronie"], ["default-editor", "openssl", "glibc", "cyrus-sasl"], ["dnf5", "rpm", "glibc-langpack-en", "device-mapper-event"], ["dnf5-plugins", "shim", "hostname", "dnf5-plugins"], ["file", "sudo", "hyperv-daemons", "efibootmgr"], ["glibc-langpack-en", "systemd-udev", "kernel-modules", "firewalld"], ["gnupg2", "zlib", "selinux-policy-targeted", "grub2-efi-aa64"], ["iproute", "", "setup", "grub2-efi-aa64-modules"], ["iputils", "", "tar", "grub2-efi-x64"], ["less", "", "vim-minimal", "grub2-efi-x64-modules"], ["lsof", "", "", "hostname"], ["man-db", "", "", "man-db"], ["man-pages", "", "", "nano"], ["nmap-ncat", "", "", "ncurses"], ["openssh-clients", "", "", "ncurses-term"], ["passwd", "", "", "nvme-cli"], ["pciutils", "", "", "rootfiles"], ["procps-ng", "", "", "rsync"], ["rpm", "", "", "shim"], ["rsync", "", "", "tpm2-tss"], ["shadow-utils", "", "", "unzip"], ["sudo", "", "", "vim-minimal"], ["symlinks", "", "", "zchunk"], ["systemd-networkd", "", "", ""], ["systemd-resolved", "", "", ""], ["systemd-udev", "", "", ""], ["tar", "", "", ""], ["tcpdump", "", "", ""], ["time", "", "", ""], ["traceroute", "", "", ""], ["tree", "", "", ""], ["unzip", "", "", ""], ["usbutils", "", "", ""], ["util-linux", "", "", ""], ["vim-minimal", "", "", ""], ["wget", "", "", ""], ["which", "", "", ""], ["whois", "", "", ""], ["wsl-setup", "", "", ""], ["zip", "", "", ""], ["zram-generator-defaults", "", "", ""]]}, {"type": "heading", "level": 2, "text": "Base profiles"}, {"type": "table", "headers": ["DistrolessBase", "OnePBase", "MarketplaceBase"], "rows": [["glibc", "SymCrypt", "SymCrypt"], ["libgcc", "SymCrypt-OpenSSL", "SymCrypt-OpenSSL"], ["openssl-libs", "azurelinux-release-identity-cloud", "acl"], ["setup", "azurelinux-rpm-config", "at"], ["", "bc", "atop"], ["", "cpio", "attr"], ["", "cronie-anacron", "audit"], ["", "curl", "azure-vm-utils"], ["", "dbus", "azurelinux-release-identity-cloud"], ["", "dhcpcd", "azurelinux-rpm-config"], ["", "dracut", "bash-completion"], ["", "e2fsprogs", "bc"], ["", "elfutils-libelf", "bind-utils"], ["", "expat", "cpio"], ["", "filesystem", "cronie-anacron"], ["", "findutils", "curl"], ["", "gdbm", "dbus"], ["", "grep", "debootstrap"], ["", "libtool", "dhcpcd"], ["", "logrotate", "dnf-plugins-core"], ["", "ncurses-libs", "dracut"], ["", "openssl", "e2fsprogs"], ["", "pkg-config", "efibootmgr"], ["", "procps-ng", "elfutils-libelf"], ["", "python3", "expat"], ["", "readline", "filesystem"], ["", "rpm", "findutils"], ["", "rpm-libs", "gdbm"], ["", "rsyslog", "grep"], ["", "sed", "hostname"], ["", "sqlite-libs", "iptables"], ["", "systemd-udev", "jemalloc"], ["", "tdnf", "keyutils"], ["", "tzdata", "libdnf"], ["", "wireless-regdb", "libtool"], ["", "xz", "libuser"], ["", "", "logrotate"], ["", "", "lsof"], ["", "", "man-db"], ["", "", "nano"], ["", "", "ncurses"], ["", "", "ncurses-libs"], ["", "", "ncurses-term"], ["", "", "newt"], ["", "", "nss"], ["", "", "nvme-cli"], ["", "", "openssl"], ["", "", "pciutils"], ["", "", "pkg-config"], ["", "", "procps-ng"], ["", "", "python3"], ["", "", "readline"], ["", "", "rng-tools"], ["", "", "rootfiles"], ["", "", "rpm"], ["", "", "rpm-libs"], ["", "", "rsync"], ["", "", "rsyslog"], ["", "", "sed"], ["", "", "sqlite-libs"], ["", "", "strace"], ["", "", "sysstat"], ["", "", "systemd-udev"], ["", "", "tcpdump"], ["", "", "time"], ["", "", "tmux"], ["", "", "tpm2-tss"], ["", "", "traceroute"], ["", "", "tzdata"], ["", "", "unzip"], ["", "", "vim-minimal"], ["", "", "wireless-regdb"], ["", "", "xz"], ["", "", "zchunk"]]}, {"type": "heading", "level": 2, "text": "Repository traits"}, {"type": "table", "headers": ["RuntimeRepos", "RuntimeReposDev", "BootstrapRepos", "BootstrapReposDev"], "rows": [["azurelinux-repos", "azurelinux-repos-dev", "azurelinux-repos", "azurelinux-repos-dev"]]}, {"type": "heading", "level": 2, "text": "Boot and security traits"}, {"type": "table", "headers": ["Fips", "UefiBoot", "LegacyBoot"], "rows": [["dracut-fips", "grub2-efi-aa64", "grub2-pc"], ["", "grub2-efi-aa64-modules", "grub2-pc-modules"], ["", "grub2-efi-x64", ""], ["", "grub2-efi-x64-modules", ""], ["", "shim", ""]]}, {"type": "heading", "level": 2, "text": "General VM leaf profiles"}, {"type": "table", "headers": ["vm-base", "vm-base-dev", "vm-iso-installer", "vm-iso-installer-dev", "minimal-os", "minimal-os-dev"], "rows": [["(none)", "(none)", "(none)", "(none)", "(none)", "(none)"]]}, {"type": "heading", "level": 2, "text": "1P VM leaf profiles"}, {"type": "table", "headers": ["1p-vm-base-gen1", "1p-vm-base-gen1-fips", "1p-vm-base-gen2-fips"], "rows": [["(none)", "(none)", "efibootmgr"]]}, {"type": "heading", "level": 2, "text": "Marketplace leaf profiles"}, {"type": "table", "headers": ["marketplace-gen2", "marketplace-gen2-dev", "marketplace-gen2-cvm", "marketplace-gen2-cvm-dev", "marketplace-gen2-fips", "marketplace-gen2-fips-dev"], "rows": [["(none)", "(none)", "grub2-efi-x64", "grub2-efi-x64", "(none)", "(none)"], ["", "", "grub2-efi-x64-modules", "grub2-efi-x64-modules", "", ""], ["", "", "shim", "shim", "", ""], ["", "", "tpm2-tools", "tpm2-tools", "", ""]]}, {"type": "heading", "level": 2, "text": "WSL leaf profiles"}, {"type": "table", "headers": ["wsl", "wsl-dev"], "rows": [["(none)", "(none)"]]}, {"type": "heading", "level": 2, "text": "Container leaf profiles"}, {"type": "table", "headers": ["core", "core-dev", "distroless-minimal", "distroless-base", "distroless-debug"], "rows": [["(none)", "(none)", "(none)", "(none)", "busybox"]]}]}]}</script>
+<script>
+"use strict";
+const data = JSON.parse(document.getElementById("document-data").textContent);
+const content = document.getElementById("content");
+const navigation = document.getElementById("navigation");
+
+function slug(value) {
+    return value.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+}
+
+function appendInline(parent, text) {
+    text.split(/(`[^`]+`)/g).filter(Boolean).forEach(part => {
+        if (part.startsWith("`") && part.endsWith("`")) {
+            const code = document.createElement("code");
+            code.textContent = part.slice(1, -1);
+            parent.append(code);
+        } else {
+            parent.append(document.createTextNode(part));
+        }
+    });
+}
+
+function renderTable(node, tableIndex) {
+    const card = document.createElement("div");
+    card.className = "table-card";
+
+    const tools = document.createElement("div");
+    tools.className = "table-tools";
+    const search = document.createElement("input");
+    search.type = "search";
+    search.placeholder = "Filter this table...";
+    search.setAttribute("aria-label", `Filter table ${tableIndex + 1}`);
+    const count = document.createElement("span");
+    count.className = "table-count";
+    tools.append(search, count);
+
+    const scroll = document.createElement("div");
+    scroll.className = "table-scroll";
+    const table = document.createElement("table");
+    const head = table.createTHead().insertRow();
+    node.headers.forEach(header => {
+        const th = document.createElement("th");
+        th.scope = "col";
+        appendInline(th, header);
+        head.append(th);
+    });
+    const body = table.createTBody();
+
+    function populate(query = "") {
+        body.replaceChildren();
+        const normalized = query.trim().toLowerCase();
+        const rows = node.rows.filter(row =>
+            !normalized || row.some(cell => cell.toLowerCase().includes(normalized))
+        );
+        rows.forEach(row => {
+            const tr = body.insertRow();
+            node.headers.forEach((_, column) => {
+                const td = tr.insertCell();
+                const value = row[column] || "";
+                appendInline(td, value);
+                if (value === "X") td.className = "selected";
+            });
+        });
+        count.textContent = `${rows.length} / ${node.rows.length} rows`;
+        if (!rows.length) {
+            const tr = body.insertRow();
+            const td = tr.insertCell();
+            td.colSpan = node.headers.length;
+            td.className = "empty";
+            td.textContent = "No matching rows";
+        }
+    }
+
+    search.addEventListener("input", () => populate(search.value));
+    populate();
+    scroll.append(table);
+    card.append(tools, scroll);
+    return card;
+}
+
+let tableIndex = 0;
+data.documents.forEach((documentData, documentIndex) => {
+    const article = document.createElement("article");
+    article.id = slug(documentData.label);
+    const source = document.createElement("span");
+    source.className = "source";
+    source.textContent = documentData.source;
+    article.append(source);
+
+    const link = document.createElement("a");
+    link.href = `#${article.id}`;
+    link.textContent = documentData.label;
+    navigation.append(link);
+
+    documentData.nodes.forEach(node => {
+        if (node.type === "heading") {
+            const level = documentIndex === 0 ? node.level : Math.min(node.level + 1, 6);
+            const heading = document.createElement(`h${level}`);
+            appendInline(heading, node.text);
+            article.append(heading);
+        } else if (node.type === "paragraph") {
+            const paragraph = document.createElement("p");
+            appendInline(paragraph, node.text);
+            article.append(paragraph);
+        } else if (node.type === "list") {
+            const list = document.createElement("ul");
+            node.items.forEach(item => {
+                const li = document.createElement("li");
+                appendInline(li, item);
+                list.append(li);
+            });
+            article.append(list);
+        } else if (node.type === "code") {
+            const pre = document.createElement("pre");
+            const code = document.createElement("code");
+            code.textContent = node.text;
+            if (node.language) code.dataset.language = node.language;
+            pre.append(code);
+            article.append(pre);
+        } else if (node.type === "table") {
+            article.append(renderTable(node, tableIndex++));
+        }
+    });
+    content.append(article);
+});
+</script>
+</body>
+</html>
