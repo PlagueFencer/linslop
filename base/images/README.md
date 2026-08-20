@@ -29,6 +29,21 @@ MinimalOsCore -> BootableCore
 InstallerCore -> BootableCore
 ```
 
+### Core and base naming
+
+`Core` identifies a foundational package set shared across a broad image
+category. Core profiles contain the smallest common layer at that level of the
+hierarchy, such as `BootableCore`, `CloudCore`, or `DistrolessCore`.
+
+`Base` identifies the common baseline for a narrower family of sibling images.
+Base profiles build on an applicable core and contain packages shared by every
+variant in that family, such as `OnePBase`, `MarketplaceBase`, or
+`DistrolessBase`.
+
+These names are project conventions, not KIWI language features. KIWI treats
+core and base profiles as ordinary profiles. In `VmBaseCore`, `vm-base` is the
+image family name and `Core` still describes the profile's role.
+
 ## Image composition
 
 The table lists each selected leaf profile and its full transitive profile
